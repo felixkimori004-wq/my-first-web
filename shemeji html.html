@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shemeji Hotel | Authentic Swahili Cuisine</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #e67e22;
+            --secondary: #2c3e50;
+            --accent: #27ae60;
+            --light: #fdfaf6;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--light);
+            color: var(--secondary);
+            line-height: 1.6;
+        }
+
+        /* Hero Section */
+        header {
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), 
+                        url('https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            height: 60vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+
+        header h1 { font-size: 3.5rem; margin-bottom: 10px; text-shadow: 2px 2px 4px rgba(0,0,0,0.5); }
+        header p { font-size: 1.2rem; font-style: italic; }
+
+        /* Navigation */
+        nav {
+            background: white;
+            padding: 1rem;
+            position: sticky;
+            top: 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            z-index: 1000;
+            text-align: center;
+        }
+
+        nav a {
+            margin: 0 15px;
+            text-decoration: none;
+            color: var(--secondary);
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        nav a:hover { color: var(--primary); }
+
+        .container { max-width: 1000px; margin: auto; padding: 40px 20px; }
+
+        /* Menu Section */
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .menu-item {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            border-left: 5px solid var(--primary);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .item-info h3 { color: var(--secondary); }
+        .price { color: var(--accent); font-weight: bold; font-size: 1.2rem; }
+
+        .add-btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        /* Billing Section */
+        .billing-box {
+            background: #fff;
+            padding: 30px;
+            border-radius: 15px;
+            margin-top: 40px;
+            border: 2px dashed var(--secondary);
+        }
+
+        .total-row {
+            font-size: 1.5rem;
+            font-weight: bold;
+            border-top: 2px solid #eee;
+            margin-top: 20px;
+            padding-top: 10px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        /* About Section */
+        .about-section {
+            background: #eee7de;
+            padding: 50px 20px;
+            border-radius: 20px;
+            margin: 40px 0;
+            text-align: center;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--secondary);
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+        }
+
+        .btn-pay {
+            background: var(--accent);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 1.1rem;
+            border-radius: 30px;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        .btn-pay:hover { opacity: 0.9; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Shemeji Hotel</h1>
+        <p>The Heart of Tana River - Swahili & African Delicacies</p>
+    </header>
+
+    <nav>
+        <a href="#menu">Our Menu</a>
+        <a href="#about">About Us</a>
+        <a href="#payment">Pay Bill</a>
+        <a href="#contact">Contact</a>
+    </nav>
+
+    <div class="container">
+        <h2 id="menu" style="text-align: center; margin-bottom: 30px;">Today's Special Menu</h2>
+        
+        <div class="menu-grid">
+            <div class="menu-item">
+                <div class="item-info">
+                    <h3>Pilau Njema (Beef)</h3>
+                    <p>Authentic Swahili spiced rice</p>
+                </div>
+                <div>
+                    <span class="price">KES 450</span>
+                    <button class="add-btn" onclick="addToTotal(450)">Add</button>
+                </div>
+            </div>
+
+            <div class="menu-item">
+                <div class="item-info">
+                    <h3>Biryani ya Kuku</h3>
+                    <p>Coastal style chicken biryani</p>
+                </div>
+                <div>
+                    <span class="price">KES 550</span>
+                    <button class="add-btn" onclick="addToTotal(550)">Add</button>
+                </div>
+            </div>
+
+            <div class="menu-item">
+                <div class="item-info">
+                    <h3>Samaki wa Kupaka</h3>
+                    <p>Grilled fish in coconut sauce</p>
+                </div>
+                <div>
+                    <span class="price">KES 700</span>
+                    <button class="add-btn" onclick="addToTotal(700)">Add</button>
+                </div>
+            </div>
+
+            <div class="menu-item">
+                <div class="item-info">
+                    <h3>Ugali Nyama Choma</h3>
+                    <p>With Kachumbari & Managu</p>
+                </div>
+                <div>
+                    <span class="price">KES 500</span>
+                    <button class="add-btn" onclick="addToTotal(500)">Add</button>
+                </div>
+            </div>
+
+            <div class="menu-item">
+                <div class="item-info">
+                    <h3>Githeri Special</h3>
+                    <p>Boiled maize and beans medley</p>
+                </div>
+                <div>
+                    <span class="price">KES 250</span>
+                    <button class="add-btn" onclick="addToTotal(250)">Add</button>
+                </div>
+            </div>
+
+            <div class="menu-item">
+                <div class="item-info">
+                    <h3>Mursik & Ugali</h3>
+                    <p>Traditional fermented milk</p>
+                </div>
+                <div>
+                    <span class="price">KES 300</span>
+                    <button class="add-btn" onclick="addToTotal(300)">Add</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="billing-box" id="payment">
+            <h2 style="margin-bottom: 15px;"><i class="fas fa-receipt"></i> Your Bill</h2>
+            <p>Click "Add" on the menu items above to calculate your total.</p>
+            <div class="total-row">
+                <span>Total Cost:</span>
+                <span>KES <span id="total-amount">0</span></span>
+            </div>
+            <button class="btn-pay" onclick="processPayment()">
+                Confirm & Pay Now
+            </button>
+        </div>
+
+        <div class="about-section" id="about">
+            <h2>About Shemeji Hotel</h2>
+            <p style="margin-top: 20px; max-width: 700px; margin-left: auto; margin-right: auto;">
+                Located in the scenic landscape of <strong>Tana River</strong>, Shemeji Hotel is a premier destination for lovers of authentic African and Swahili cuisine. Owned and managed by <strong>Mr. Robert Sagwe</strong>, we pride ourselves on using fresh local ingredients to bring the taste of the coast and the mainland to your plate.
+            </p>
+        </div>
+    </div>
+
+    <footer id="contact">
+        <h2>Get In Touch</h2>
+        <p style="margin: 15px 0;"><i class="fas fa-phone"></i> 0713939198</p>
+        <p style="margin: 15px 0;"><i class="fas fa-envelope"></i> robersagwe@gmail.com</p>
+        <p style="margin: 15px 0;"><i class="fas fa-map-marker-alt"></i> Tana River, Kenya</p>
+        <hr style="margin: 20px auto; width: 50%; opacity: 0.3;">
+        <p>&copy; 2026 Shemeji Hotel. All Rights Reserved. Owned by Robert Sagwe.</p>
+    </footer>
+
+    <script>
+        let runningTotal = 0;
+
+        function addToTotal(price) {
+            runningTotal += price;
+            document.getElementById('total-amount').innerText = runningTotal;
+        }
+
+        function processPayment() {
+            if(runningTotal === 0) {
+                alert("Please add some delicious food to your bill first!");
+            } else {
+                alert("Thank you for dining at Shemeji Hotel! Total Bill: KES " + runningTotal + "\nPlease proceed to the counter or use M-Pesa.");
+                runningTotal = 0;
+                document.getElementById('total-amount').innerText = "0";
+            }
+        }
+    </script>
+</body>
+</html><!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shemeji Hotel | Authentic Swahili & African Cuisine</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #e67e22;
+            --secondary: #2c3e50;
+            --accent: #27ae60;
+            --mpesa: #49b848;
+            --light: #fdfaf6;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--light);
+            color: var(--secondary);
+            line-height: 1.6;
+        }
+
+        /* Hero Section */
+        header {
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), 
+                        url('https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            height: 50vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+
+        header h1 { font-size: 3.5rem; margin-bottom: 10px; }
+
+        /* Navigation */
+        nav {
+            background: white;
+            padding: 1rem;
+            position: sticky;
+            top: 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            z-index: 1000;
+            text-align: center;
+        }
+
+        nav a {
+            margin: 0 15px;
+            text-decoration: none;
+            color: var(--secondary);
+            font-weight: bold;
+        }
+
+        .container { max-width: 1000px; margin: auto; padding: 40px 20px; }
+
+        /* Menu Section */
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .menu-item {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            border-left: 5px solid var(--primary);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .price { color: var(--accent); font-weight: bold; font-size: 1.2rem; }
+
+        .add-btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .add-btn:hover { transform: scale(1.05); }
+
+        /* Billing & Paybill Section */
+        .billing-box {
+            background: #fff;
+            padding: 30px;
+            border-radius: 15px;
+            margin-top: 40px;
+            border: 2px solid var(--mpesa);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+
+        .paybill-badge {
+            background: var(--mpesa);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 8px;
+            display: inline-block;
+            font-weight: bold;
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+        }
+
+        .total-row {
+            font-size: 2rem;
+            font-weight: bold;
+            border-top: 2px solid #eee;
+            margin: 20px 0;
+            padding-top: 10px;
+            display: flex;
